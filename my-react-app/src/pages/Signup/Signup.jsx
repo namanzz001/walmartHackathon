@@ -1,5 +1,5 @@
 import React from 'react'
-import 'C:/Users/HP/walmartHackathon/my-react-app/src/pages/Signup/Signup.css'
+import '../Signup/Signup.css'
 const Signup = () => {
   return (
        <div className="form">
