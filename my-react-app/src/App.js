@@ -1,16 +1,16 @@
 import {BrowserRouter as Router, Routes, Route} from 'react';
 import Login from './pages/Login';
-import Signup from './pages/Signup';
+import signup from './pages/Signup';
 
 const App = () => {
   return (
     <div>
-      <Router>
+      <Router/>
         <Routes>
-          <Route path="/signup" element={<Login/>} />
-          <Route path="/login" element={<Signup/>} />
+          <Route path="/signup" element={<signup/>} />
+          <Route path="/login" element={<Login/>} />
         </Routes>
-      </Router>
+        <Router/>
     </div>
   )
 }
