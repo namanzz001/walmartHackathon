@@ -1,0 +1,112 @@
+.login-container{
+    display: flex;
+    flex-direction: column;
+    font-family:'Open Sans', sans-serif;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    background-color:rgb(10, 38, 60);
+    border-radius: 10px;
+    padding-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    animation: fadeIn 0.8s ease-in-out;
+}
+.header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    margin-top: 30px;
+}
+.text{
+    color:antiquewhite;
+    font-size: 47px;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.underline{
+    width: 22.5%;
+    height: 5px;
+    background: linear-gradient(90deg, aquamarine, antiquewhite);;
+    border-radius: 9px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.inputs{
+    margin-top: 55px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.input{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    width: 70%;
+    height: 60px;
+    background: rgb(67, 59, 75);
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+.input input{
+    height: 50px;
+    width: calc(100% - 20px);
+    background: transparent;
+    border: none;
+    outline: none;
+    color:antiquewhite;
+    font-size: 22px;
+    padding: 10px;
+    transition: all 0.3s ease-in-out;
+}
+.forgot-password{
+    padding-left: 62px;
+    margin-top: 27px;
+    color:antiquewhite;
+    font-size: 18px;
+    text-decoration:solid;
+}
+.forgot-password span{
+    color:aquamarine;
+    cursor: pointer;
+}
+.submit-container{
+    display:flex;
+    gap:30px;
+    margin: 25px auto;
+}
+.submit{
+    width: 130px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:rgb(10, 38, 60);
+    background: antiquewhite;
+    border-radius: 50px;
+    font-size: 22px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.submit:hover {
+    background-color: #626058;
+    transform: scale(1.05);
+}
+.error {
+    color: rgb(117, 29, 29);
+    text-align: center;
+    margin-top: 10px;
+}
+@keyframes fadeIn {
+    from
+    { opacity: 0;
+        transform: translate(-50%, -55%); }
+    to
+    { opacity: 1;
+        transform: translate(-50%, -50%); }
+}

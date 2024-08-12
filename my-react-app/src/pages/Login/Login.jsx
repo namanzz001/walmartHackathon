@@ -1,49 +1,61 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import axios from 'axios';
+import './Login.css'
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
-    // Basic validation
-    if (!email || !password) {
+    if (!email || !password)
+    {
       setError('Please fill in all fields');
+      setLoading(false);
       return;
     }
+    try
+    {
+      const response = await axios.post('/api/login', { email, password });
+      const token = response.data.token;
+      localStorage.setItem('token', token);
+      alert('Login Successfull!');
+      // REDIRECTION TO PROTECTED ROUTE
 
-    setError('');
-    alert('Login successful!');
+    }
+    catch (error)
+    {
+      setError(error.response?.data?.error || 'An error occurred');
+    }
+    finally{
+      setLoading(false); 
+    }
   };
 
   return (
-    <div style={styles.container}>
-      <h2>Login</h2>
-      {error && <p style={styles.error}>{error}</p>}
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <div style={styles.inputGroup}>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={styles.input}
-          />
-        </div>
-        <div style={styles.inputGroup}>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={styles.input}
-          />
-        </div>
-        <button type="submit" style={styles.button}>Login</button>
+    <div className="login-container">
+      <div className='header'>
+        <div className='text'>Login</div>
+        <div className='underline'></div>
+      </div>
+      <form onSubmit={handleSubmit} className='inputs'>
+      <div className="input">
+        <input type="email" placeholder='Email Id' value={email} onChange={(e) => setEmail(e.target.value)} />
+      </div>
+      <div className="input">
+        <input type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
+      </div>
+      {error && (<div className='error'>{error}</div>)}
+      <div className="forgot-password">Forgot Password? <span>Click Here</span>
+      </div>
+      <div className="submit-container">
+        <button type="submit" className='submit'  disabled={loading}>{loading ? 'Logging in...' : 'Login'}
+        </button>
+      </div>
       </form>
     </div>
   );
