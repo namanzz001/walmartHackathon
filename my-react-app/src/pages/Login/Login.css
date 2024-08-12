@@ -31,7 +31,7 @@
 .underline{
     width: 22.5%;
     height: 5px;
-    background: linear-gradient(90deg, aquamarine, antiquewhite);;
+    background: linear-gradient(90deg, aquamarine, antiquewhite);
     border-radius: 9px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
