@@ -13,38 +13,53 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-
+    setError(''); // Clear previous errors
+  
     if (!email || !password) {
       setError('Please fill in all fields');
       setLoading(false);
       return;
     }
-
+  
     try {
+      // Clear localStorage to prevent role mismatch
+      localStorage.removeItem('token');
+      localStorage.removeItem('role');
+  
       const response = await axios.post('http://localhost:5000/api/login', { email, password });
       const token = response.data.token;
       const role = response.data.role;
-
-      // Storing token and role in localStorage
+  
+      // Log the returned role for debugging
+      console.log('Returned Role from Server:', role);
+  
+      // Set the correct token and role in localStorage
       localStorage.setItem('token', token);
       localStorage.setItem('role', role);
-
+  
+      // Force a re-render in App.jsx by triggering a state update
+      window.dispatchEvent(new Event('storage')); // This triggers the storage event for the other components to pick up the change
+  
       alert('Login Successful!');
-
-      if(role == 'businessman'){
+  
+      // Redirect based on the actual role of the logged-in user
+      if (role === 'businessman') {
         navigate('/businessmandashboard');
-      }else if(role == 'client'){
+      } else if (role === 'client') {
         navigate('/clientdashboard');
-      }else{
+      } else {
+        setError('Invalid role detected. Please try again.');
         navigate('/login');
       }
     } catch (error) {
-      setError(error.response?.data?.error || 'An error occured');
+      console.error('Login Error:', error); // Log the error for debugging
+      setError(error.response?.data?.error || 'An error occurred');
     } finally {
       setLoading(false);
     }
   };
-
+  
+  
   return (
     <div className="login-container">
       <div className='header'>
