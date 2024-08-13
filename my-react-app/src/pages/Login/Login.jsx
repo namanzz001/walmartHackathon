@@ -22,28 +22,24 @@ const Login = () => {
 
     try {
       const response = await axios.post('http://localhost:5000/api/login', { email, password });
-      const { token, role } = response.data;
-
-      console.log('Login Response:', response.data); // Debug log to check role
+      const token = response.data.token;
+      const role = response.data.role;
 
       // Storing token and role in localStorage
       localStorage.setItem('token', token);
       localStorage.setItem('role', role);
 
-      console.log('Stored Token:', localStorage.getItem('token'));
-      console.log('Stored Role:', localStorage.getItem('role'));
+      alert('Login Successful!');
 
-      // Navigate based on role
-      if (role === 'businessman') {
+      if(role == 'businessman'){
         navigate('/businessmandashboard');
-      } else if (role === 'client') {
+      }else if(role == 'client'){
         navigate('/clientdashboard');
-      } else {
+      }else{
         navigate('/login');
       }
     } catch (error) {
-      console.error('Login error:', error);
-      setError(error.response?.data?.error || 'An error occurred');
+      setError(error.response?.data?.error || 'An error occured');
     } finally {
       setLoading(false);
     }
@@ -51,23 +47,31 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <div className="header">
-        <div className="text">Login</div>
-        <div className="underline"></div>
+      <div className='header'>
+        <div className='text'>Login</div>
+        <div className='underline'></div>
       </div>
-      <form onSubmit={handleSubmit} className="inputs">
+      <form onSubmit={handleSubmit} className='inputs'>
         <div className="input">
-          <input type="email" placeholder="Email Id" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input
+            type="email"
+            placeholder='Email Id'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div className="input">
-          <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input
+            type="password"
+            placeholder='Password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
-        {error && <div className="error">{error}</div>}
-        <div className="forgot-password">
-          Forgot Password? <span>Click Here</span>
-        </div>
+        {error && (<div className='error'>{error}</div>)}
+        <div className="forgot-password">Forgot Password? <span>Click Here</span></div>
         <div className="submit-container">
-          <button type="submit" className="submit" disabled={loading}>
+          <button type="submit" className='submit' disabled={loading}>
             {loading ? 'Logging in...' : 'Login'}
           </button>
         </div>
