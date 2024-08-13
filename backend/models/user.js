@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
   email: { type: String, unique: true, required: true },
   phoneNumber: String,
   password: { type: String, required: true },
+  role: { type: String, required: true, enum: ['client', 'businessman'] }, // Ensure role is correctly defined
 });
 
 // Hash the password before saving the user model

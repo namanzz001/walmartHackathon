@@ -1,13 +1,17 @@
+// Existing imports and setup
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('./models/user'); // Make sure the path is correct
+const User = require('./models/user'); // Ensure the path is correct
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true,
+}));
 app.use(bodyParser.json());
 
 // MongoDB connection
@@ -20,9 +24,37 @@ mongoose.connect('mongodb://localhost:27017/walmartHackathon', {
   console.error('Failed to connect to MongoDB', err);
 });
 
+// Businessman Dashboard Data
+const salesData = {
+  weekly: 1000,
+  monthly: 4000,
+  yearly: 50000,
+  categories: {
+    Electronics: 20000,
+    Groceries: 15000,
+    Clothing: 15000,
+  }
+};
+
+const inventoryData = {
+  Electronics: 50,
+  Groceries: 200,
+  Clothing: 120,
+};
+
+// Endpoint to get sales data
+app.get('/api/sales', (req, res) => {
+  res.json(salesData);
+});
+
+// Endpoint to get inventory data
+app.get('/api/inventory', (req, res) => {
+  res.json(inventoryData);
+});
+
 // Signup route
 app.post('/api/signup', async (req, res) => {
-  const { firstName, lastName, email, phoneNumber, password } = req.body;
+  const { firstName, lastName, email, phoneNumber, password, role } = req.body;
 
   try {
     const existingUser = await User.findOne({ email });
@@ -30,7 +62,7 @@ app.post('/api/signup', async (req, res) => {
       return res.status(400).json({ error: 'User already exists' });
     }
 
-    const user = new User({ firstName, lastName, email, phoneNumber, password });
+    const user = new User({ firstName, lastName, email, phoneNumber, password, role });
     await user.save();
 
     res.json({ message: 'User registered successfully' });
@@ -42,31 +74,52 @@ app.post('/api/signup', async (req, res) => {
 
 // Login route
 app.post('/api/login', async (req, res) => {
-  const { email, password } = req.body;
+    const { email, password } = req.body;
+  
+    try {
+      const user = await User.findOne({ email });
+      if (!user) {
+        return res.status(400).json({ error: 'Invalid email or password' });
+      }
+  
+      const isMatch = await user.matchPassword(password);
+      if (!isMatch) {
+        return res.status(400).json({ error: 'Invalid email or password' });
+      }
+  
+      // Ensure the role is correctly obtained from the user object
+      const role = user.role;
+      console.log('User role:', role); // Debug log
+  
+      // Generate the JWT token
+      const token = jwt.sign({ userId: user._id, role: role }, 'your_jwt_secret', { expiresIn: '1h' });
+  
+      res.json({ token, role });  // Ensure role is sent in the response
+    } catch (error) {
+      console.error('Server error during login:', error); // Debug log
+      res.status(500).json({ error: 'Server error during login' });
+    }
+  });
+  
+  
+
+// Fetch user details
+app.get('/api/user', async (req, res) => {
+  const token = req.headers.authorization?.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
 
   try {
-    // Check if the user exists
-    const user = await User.findOne({ email });
+    const decoded = jwt.verify(token, 'your_jwt_secret');
+    const user = await User.findById(decoded.userId).select('firstName lastName email role');
     if (!user) {
-      console.log("User not found");
-      return res.status(400).json({ error: 'Invalid email or password' });
+      return res.status(404).json({ error: 'User not found' });
     }
-
-    // Check if the password matches
-    const isMatch = await user.matchPassword(password);
-    if (!isMatch) {
-      console.log("Password mismatch");
-      return res.status(400).json({ error: 'Invalid email or password' });
-    }
-
-    // Generate a JWT token
-    const token = jwt.sign({ userId: user._id }, 'your_jwt_secret', { expiresIn: '1h' });
-
-    // Return the token
-    res.json({ token });
+    res.json(user);
   } catch (error) {
-    console.error("Login error:", error);
-    res.status(500).json({ error: 'Server error during login' });
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
