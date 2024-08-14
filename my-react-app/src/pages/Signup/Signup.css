@@ -119,7 +119,16 @@ body{
     background-color: #626058;
     transform: scale(1.05);
   }
-  
+
+  .login{
+    display: flex;
+    padding-left: 62px;
+    margin-left: 178px;
+    color: antiquewhite;
+    font-size: 18px;
+    text-decoration: solid;
+    margin-bottom: 25px;
+  }
   @keyframes fadeIn {
     from {
       opacity: 0;

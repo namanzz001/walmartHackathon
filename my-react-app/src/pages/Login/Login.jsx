@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -89,6 +90,9 @@ const Login = () => {
           <button type="submit" className='submit' disabled={loading}>
             {loading ? 'Logging in...' : 'Login'}
           </button>
+        </div>
+        <div className='signup'>
+        <Link to="/signup">Don't have an account? Sign up</Link>
         </div>
       </form>
     </div>

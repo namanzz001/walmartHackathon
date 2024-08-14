@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import './BusinessmanDashboard.css';
 
 const BusinessmanDashboard = () => {
@@ -40,7 +41,6 @@ const BusinessmanDashboard = () => {
   return (
     <div className="dashboard-container">
       <h1>Businessman Dashboard</h1>
-
       <div className="section">
         <h2>Sales</h2>
         {sales ? (
@@ -83,6 +83,7 @@ const BusinessmanDashboard = () => {
           <p>Loading inventory data...</p>
         )}
       </div>
+      <Link to="/ClientDashboard" >Go to Client Dashboard</Link>
     </div>
   );
 };

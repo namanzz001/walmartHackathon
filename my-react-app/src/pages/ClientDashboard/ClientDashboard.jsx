@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import './ClientDashboard.css';
 
 const ClientDashboard = () => {
@@ -74,6 +75,7 @@ const ClientDashboard = () => {
           <p>No expenses data available.</p>
         )}
       </div>
+      <Link to="/BusinessmanDashboard">Go back to Businessman Dashboard</Link>
     </div>
   );
 };
