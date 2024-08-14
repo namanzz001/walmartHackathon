@@ -84,7 +84,7 @@ const Login = () => {
           />
         </div>
         {error && (<div className='error'>{error}</div>)}
-        <div className="forgot-password">Forgot Password? <span>Click Here</span></div>
+        <div className="forgot-password">New User? <span>Signup Now</span></div>
         <div className="submit-container">
           <button type="submit" className='submit' disabled={loading}>
             {loading ? 'Logging in...' : 'Login'}
