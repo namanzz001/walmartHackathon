@@ -43,8 +43,12 @@ const Signup = () => {
 
   return (
     <div className="form">
-      <div className="form-body">
-        <div className="username">
+      <div className='header'>
+        <div className='text'>Signup</div>
+        <div className='underline'></div>
+      </div>
+      <form className="form-body" onSubmit={handleSubmit}>
+        <div className="form-group">
           <label className="form__label" htmlFor="firstName">First Name </label>
           <input 
             className="form__input" 
@@ -55,7 +59,7 @@ const Signup = () => {
             onChange={(e) => setFirstName(e.target.value)} 
           />
         </div>
-        <div className="lastname">
+        <div className="form-group">
           <label className="form__label" htmlFor="lastName">Last Name </label>
           <input 
             type="text" 
@@ -66,7 +70,7 @@ const Signup = () => {
             onChange={(e) => setLastName(e.target.value)} 
           />
         </div>
-        <div className="email">
+        <div className="form-group">
           <label className="form__label" htmlFor="email">Email </label>
           <input 
             type="email" 
@@ -77,7 +81,7 @@ const Signup = () => {
             onChange={(e) => setEmail(e.target.value)} 
           />
         </div>
-        <div className="phone-number">
+        <div className="form-group">
           <label className="form__label" htmlFor="phoneNumber">Phone Number </label>
           <input 
             type="tel" 
@@ -90,7 +94,7 @@ const Signup = () => {
             required 
           />
         </div>
-        <div className="password">
+        <div className="form-group">
           <label className="form__label" htmlFor="password">Password </label>
           <input 
             className="form__input" 
@@ -101,7 +105,7 @@ const Signup = () => {
             onChange={(e) => setPassword(e.target.value)} 
           />
         </div>
-        <div className="confirm-password">
+        <div className="form-group">
           <label className="form__label" htmlFor="confirmPassword">Confirm Password </label>
           <input 
             className="form__input" 
@@ -112,8 +116,8 @@ const Signup = () => {
             onChange={(e) => setConfirmPassword(e.target.value)} 
           />
         </div>
-        <div className="role-selection">
-          <label className="form__label">Role: </label>
+        <div className="form-group">
+          <label className="form__label" htmlFor="role">Role </label>
           <select 
             className="form__input" 
             value={role} 
@@ -122,7 +126,7 @@ const Signup = () => {
             <option value="businessman">Businessman</option>
           </select>
         </div>
-      </div>
+      </form>
       {error && <div className="error">{error}</div>}
       <div className="footer">
         <button type="submit" className="btn" onClick={handleSubmit} disabled={loading}>
