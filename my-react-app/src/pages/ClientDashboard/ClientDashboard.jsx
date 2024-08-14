@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import './ClientDashboard.css';
 
 const ClientDashboard = () => {
   const [alerts, setAlerts] = useState([]);
@@ -44,9 +46,8 @@ const ClientDashboard = () => {
   return (
     <div className="dashboard-container">
       <h1>Client Dashboard</h1>
-
       <div className="section">
-        <h2>Alerts & Notifications</h2>
+        <h2><center>Alerts & Notifications</center></h2>
         <ul>
           {alerts.length > 0 ? alerts.map((alert, index) => (
             <li key={index}>{alert.message}</li>
@@ -74,6 +75,7 @@ const ClientDashboard = () => {
           <p>No expenses data available.</p>
         )}
       </div>
+      <Link to="/BusinessmanDashboard">Go back to Businessman Dashboard</Link>
     </div>
   );
 };

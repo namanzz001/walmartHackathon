@@ -35,7 +35,7 @@ function App() {
         />
         <Route
           path="/clientdashboard"
-          element={role === 'client' ? <ClientDashboard /> : <Navigate to="/login" />}
+          element={role === 'client' ? < ClientDashboard /> : <Navigate to="/login" />}
         />
         <Route
           path="/dashboard"
