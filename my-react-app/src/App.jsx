@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import ConnectBusinessman from './pages/ConnectBusinessman/ConnectBusinessman';
 import BusinessmanDashboard from './pages/BusinessmanDashboard/BusinessmanDashboard';
 import ClientDashboard from './pages/ClientDashboard/ClientDashboard'; 
 import Login from './pages/Login/Login';
@@ -30,6 +31,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/connectbusinessman" element={<ConnectBusinessman />} />
         <Route
           path="/businessmandashboard"
           element={role === 'businessman' ? <BusinessmanDashboard /> : <Navigate to="/login" />}

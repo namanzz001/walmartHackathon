@@ -1,0 +1,77 @@
+.connect-businessman-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: rgb(10, 38, 60);
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .connect-businessman-container h2 {
+    margin-top: 0;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .connect-businessman-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .connect-businessman-container li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .connect-businessman-container li:last-child {
+    border-bottom: none;
+  }
+  
+  .connect-businessman-container li span {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .connect-businessman-container li button {
+    background-color: aquamarine;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .connect-businessman-container li button:hover {
+    background-color: aquamarine;
+  }
+  
+  .connect-businessman-container .selected-businessman {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  .connect-businessman-container .selected-businessman h3 {
+    margin-top: 0;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .connect-businessman-container .selected-businessman button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .connect-businessman-container .selected-businessman button:hover {
+    background-color: #3e8e41;
+  }
+  
+  .connect-businessman-container p {
+    color: #666;
+    font-size: 14px;
+  }
