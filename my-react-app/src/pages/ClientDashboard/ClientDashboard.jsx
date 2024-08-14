@@ -75,7 +75,6 @@ const ClientDashboard = () => {
           <p>No expenses data available.</p>
         )}
       </div>
-      <Link to="/BusinessmanDashboard">Go back to Businessman Dashboard</Link>
     </div>
   );
 };
