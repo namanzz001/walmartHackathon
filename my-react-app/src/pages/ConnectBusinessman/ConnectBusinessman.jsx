@@ -43,7 +43,7 @@ const ConnectBusinessman = () => {
 
     axios.post('http://localhost:5000/api/connect', {
       clientId: localStorage.getItem('clientId'),
-      businessmanId: selectedBusinessman.id,
+      businessmanId: selectedBusinessman.uuid,
     })
       .then(response => {
         setConnectionRequest(false);
